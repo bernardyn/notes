@@ -1,0 +1,248 @@
+SELECT ?child
+WHERE
+{
+# ?child  father   Bach
+  ?child wdt:P22 wd:Q1339
+}
+
+
+SELECT DISTINCT ?item ?itemLabel WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "pl". }
+  {
+    SELECT DISTINCT ?item WHERE {
+      ?item p:P31 ?statement0.
+      ?statement0 (ps:P31) wd:Q102496.
+    }
+    LIMIT 100
+  }
+}
+wykaz obiektów określonej klasy 
+
+#Cats 
+
+SELECT ?item ?itemLabel 
+
+WHERE 
+
+{  
+
+  ?item wdt:P31 wd:Q15617994. # Must be of a cat 
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } # Helps get the label in your language, if not, then en language 
+
+} 
+
+
+wykaz obiektów określonej klasy (z aliasami) 
+
+ 
+SELECT (?item AS ?typ) (?itemLabel AS ?nazwa) 
+
+WHERE  
+
+{   
+
+  ?item wdt:P31 wd:Q15617994. # Must be of a cat  
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".  
+
+                         ?item rdfs:label ?itemLabel. 
+
+                         } # Helps get the label in your language, if not, then en language  
+
+ 
+
+
+liczenie obiektów określonej klasy 
+
+ 
+
+SELECT (COUNT(?item) as ?liczba) 
+
+WHERE 
+
+{ 
+
+  ?item wdt:P31 wd:Q15617994. # Must be of a cat 
+
+  SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } # Helps get the label in your language, if not, then en language 
+
+}  
+
+ 
+
+#andrzej
+# 
+
+SELECT (COUNT(?item) as ?liczba) ?itemLabel
+
+WHERE 
+{ 
+  ?item wdt:P31 wd:Q15617994.
+  
+  SERVICE wikibase:label 
+  { 
+    bd:serviceParam 
+    wikibase:language "pl"
+  }
+}
+group by ?itemLabel
+order by desc (?liczba)
+
+
+liczba obiektów należących do klasy, należącej do klasy nadrzędnej 
+
+ 
+
+SELECT (COUNT (?item) as ?liczba) ?itemLabel ?item 
+
+WHERE  
+
+{   
+
+  ?s wdt:P31 ?item . 
+
+  ?item wdt:P31 wd:Q15617994 .  
+
+  
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } # Helps get the label in your language, if not, then en language  
+
+}  
+
+GROUP BY ?item ?itemLabel 
+
+ORDER BY desc (?liczba) 
+#andrzej
+# parafie i fotki z diecezji drohiczyńskiej
+
+SELECT ?item ?itemLabel ?photo ?diecezjaLabel
+WHERE 
+{
+  ?item wdt:P31 wd:Q102496.
+  ?item wdt:P5607 wd:Q282062.
+  ?item wdt:P5607 ?diecezja.
+  ?item wdt:P18 ?photo.
+
+  SERVICE wikibase:label 
+  { 
+    bd:serviceParam 
+    wikibase:language "pl"
+  }}
+#andrzej
+#wszystkie rekordy z obiektu diecezja - Q665487
+
+SELECT ?item ?itemLabel
+WHERE 
+{
+  ?item wdt:P31 wd:Q665487.
+
+  SERVICE wikibase:label 
+  { 
+    bd:serviceParam 
+    wikibase:language "pl"
+  }
+}
+order by desc (?itemLabel)
+#andrzej
+#parafie i location
+
+SELECT ?item ?itemLabel ?location ?label
+WHERE 
+{
+  ?item wdt:P31 wd:Q241.
+  OPTIONAL { ?item wdt:P29 ?location }
+
+  SERVICE wikibase:label 
+  { 
+    bd:serviceParam 
+    wikibase:language "pl"
+  }
+  
+}
+order by desc (?itemLabel)
+#location wariant z filter po where ze label ma byc
+
+SELECT ?item ?itemLabel ?location ?label
+WHERE 
+{
+  ?item wdt:P31 wd:Q241;
+        wdt:P27 wd:Q88;
+        rdfs:label ?label.
+  OPTIONAL { ?item wdt:P29 ?location }
+  FILTER(LANG(?label) = "pl").
+}
+order by desc (?itemLabel)
+#filter wariant contains
+
+SELECT ?item ?location ?label
+WHERE 
+{
+  ?item wdt:P31 wd:Q241;
+        rdfs:label ?label.
+  OPTIONAL { ?item wdt:P29 ?location }
+  FILTER(LANG(?label) = "pl").
+  FILTER(CONTAINS(?label, "zmiania 1")).
+  
+}
+#andrzej
+#wszystkie rekordy z obiektu diecezja - Q1364888
+
+SELECT ?item ?itemLabel
+WHERE 
+{
+  ?item wdt:P708 wd:Q1364888.
+
+  SERVICE wikibase:label 
+  { 
+    bd:serviceParam 
+    wikibase:language "pl"
+  }
+}
+order by desc (?itemLabel)
+#optional
+#andrzej
+
+SELECT ?item ?itemLabel ?podklasaLabel
+WHERE 
+{
+  ?item wdt:P31 wd:Q102496.
+  OPTIONAL {?item wdt:P279 ?podklasaLabel.}
+
+  SERVICE wikibase:label 
+  { 
+    bd:serviceParam 
+    wikibase:language "pl"
+  }
+}
+order by desc (?itemLabel)
+SELECT ?subject ?label
+WHERE {
+  ?subject rdfs:label ?label .
+  FILTER (CONTAINS(?label, 'x')) .
+}
+PREFIX wdt: <https://cidoc.wiki.kul.pl/prop/direct/>
+PREFIX wd: <https://cidoc.wiki.kul.pl/entity/>
+
+SELECT ?item ?label ?geo WHERE {
+  ?item wdt:P2 wd:Q16.
+  ?item rdfs:label ?label.
+  ?item wdt:P1 ?geo.
+}
+order by ?label
+
+
+
+
+
+PREFIX wdt: <https://cidoc.wiki.kul.pl/prop/direct/>
+PREFIX wd: <https://cidoc.wiki.kul.pl/entity/>
+PREFIX pq: <https://cidoc.wiki.kul.pl/prop/qualifier/>
+
+SELECT ?item ?statements ?statementLabel ?number ?date
+WHERE 
+{
+  ?item wdt:P470 ?statements.
+     ?statements rdfs:label ?statementLabel.
+      OPTIONAL{?o pq:P469 ?number}
+}

@@ -1,0 +1,103 @@
+{
+    "type": "property",
+    "datatype": "wikibase-item",
+    "id": "P311",
+    "labels": {
+        "en": {
+            "language": "en",
+            "value": "qualifiedCardinality"
+        }
+    },
+    "descriptions": [],
+    "aliases": [],
+    "claims": {
+        "P1": [
+            {
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P1",
+                    "hash": "3f9e846c2700a23f6632ef379906e21427bb1a71",
+                    "datavalue": {
+                        "value": "http:\/\/www.w3.org\/2002\/07\/owl#qualifiedCardinality",
+                        "type": "string"
+                    }
+                },
+                "type": "statement",
+                "id": "P311$779AB711-16C1-4CA0-8356-0098970902B2",
+                "rank": "normal"
+            }
+        ],
+        "P4": [
+            {
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P4",
+                    "hash": "e491d1a61a5d0b508096f3c3428ad316fa92c1a4",
+                    "datavalue": {
+                        "value": "The property that determines the cardinality of an exact qualified cardinality restriction.",
+                        "type": "string"
+                    }
+                },
+                "type": "statement",
+                "id": "P311$B92559AA-B2C2-4944-86ED-BC58C37241AD",
+                "rank": "normal"
+            }
+        ],
+        "P10": [
+            {
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P10",
+                    "hash": "7d2e79c04ae44553464b472aebbec96ae4d8125c",
+                    "datavalue": {
+                        "value": "http:\/\/www.w3.org\/2002\/07\/owl#",
+                        "type": "string"
+                    }
+                },
+                "type": "statement",
+                "id": "P311$00EB41FA-4A08-420D-9C14-A4E3016B0E20",
+                "rank": "normal"
+            }
+        ],
+        "P5": [
+            {
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P5",
+                    "hash": "ee4d0489ec6698263fa9d030b3fec4c1b4895c74",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 142,
+                            "id": "Q142"
+                        },
+                        "type": "wikibase-entityid"
+                    }
+                },
+                "type": "statement",
+                "id": "P311$21D31214-BE1F-4C3F-A02F-8BE0E8C92459",
+                "rank": "normal"
+            }
+        ],
+        "P8": [
+            {
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P8",
+                    "hash": "ffa3d53f5411f88dc71678be9462717065612016",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 460,
+                            "id": "Q460"
+                        },
+                        "type": "wikibase-entityid"
+                    }
+                },
+                "type": "statement",
+                "id": "P311$FAC7194C-35AD-452F-A888-884746FEED9D",
+                "rank": "normal"
+            }
+        ]
+    }
+}
